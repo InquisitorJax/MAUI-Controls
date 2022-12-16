@@ -2,7 +2,14 @@
 
 public class MarkdownTextView : Label
 {
-	public static BindableProperty MarkdownProperty = BindableProperty.Create(nameof(Markdown), typeof(string), typeof(MarkdownTextView));
+
+	public static readonly BindableProperty MarkdownProperty = BindableProperty.Create(
+			propertyName: nameof(Markdown),
+			returnType: typeof(string),
+			declaringType: typeof(MarkdownTextView),
+			defaultValue: string.Empty,
+			defaultBindingMode: BindingMode.OneWay);
+
 	public string Markdown
 	{
 		get { return (string)GetValue(MarkdownProperty); }

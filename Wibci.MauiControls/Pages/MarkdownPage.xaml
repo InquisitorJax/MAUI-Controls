@@ -18,7 +18,7 @@
 			<Label Text="RAW" />
 			<Label x:Name="_lblRaw" />
 			<Label Text="MD -&gt; HTML -&gt; Native Attributed Text" />
-			<controls:MarkdownTextView x:Name="_lblMarkdown" />
+			<controls:MarkdownTextView x:Name="_lblMarkdown" Margin="8" />
 		</VerticalStackLayout>
 	</ScrollView>
 </ContentPage>

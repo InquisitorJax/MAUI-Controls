@@ -7,7 +7,7 @@ public partial class MarkdownPage : ContentPage
 		InitializeComponent();
 	}
 
-	private const string MarkdownSampleText = @"This is *italic* and __underline__ and **bold** and __*underline italic*__ and __**underline bold**__ and ***bold italic*** and __***underline bold italic***__.
+	public const string MarkdownSampleText = @"This is *italic* and __underline__ and **bold** and __*underline italic*__ and __**underline bold**__ and ***bold italic*** and __***underline bold italic***__.
 This is ~~strike through~~.
 This is ~sub~script and this is ^super^script.
 This is <span style=""color:blue"">blue text</span> and <span style=""background:yellow"">highlighted text</span>
