@@ -2,7 +2,6 @@
 using Microsoft.Maui.Controls.Compatibility.Platform.Android.FastRenderers;
 using System.ComponentModel;
 using Wibci.MauiControls.Extensions;
-using Wibci.MauiControls.Pages;
 using Wibci.MauiControls.Platforms.Android.Utils;
 
 namespace Wibci.MauiControls.Controls;
@@ -22,7 +21,7 @@ internal class MarkdownTextViewRenderer : LabelRenderer
 		if (Control == null)
 			return;
 
-		//Control.TextFormatted = TextUtil.GetFormattedHtml(MarkdownPage.MarkdownSampleText.GetHtmlFromMarkdown(true));
+		//Control.TextFormatted = TextUtil.GetFormattedHtml(Wibci.MauiControls.Pages.MarkdownPage.MarkdownSampleText.GetHtmlFromMarkdown(true));
 		// property change for markdow doesn't fire! :(
 		if (e.PropertyName== nameof(MarkdownTextView.Markdown))
 		{
