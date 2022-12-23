@@ -22,7 +22,9 @@ public partial class MarkdownTextViewHandler
 		}
 		else
 		{
-			platformView.TextFormatted = TextUtil.GetFormattedHtml(markdown.GetHtmlFromMarkdown(true));
+			string htmlText = markdown.GetHtmlFromMarkdown(true);
+			var formattedHtml = TextUtil.GetFormattedHtml(htmlText);
+			platformView.TextFormatted = formattedHtml;
 		}
 	}
 

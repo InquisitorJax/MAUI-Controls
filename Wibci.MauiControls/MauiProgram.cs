@@ -14,9 +14,9 @@ public static class MauiProgram
 			.UseMauiCompatibility() // to be able to use Renderers
 			.ConfigureMauiHandlers(handlers =>
 			{
-				//handlers.AddHandler(typeof(MarkdownTextView), typeof(MarkdownTextViewHandler));
+				handlers.AddHandler(typeof(MarkdownTextView), typeof(MarkdownTextViewHandler));
 #if ANDROID
-				handlers.AddCompatibilityRenderer(typeof(MarkdownTextView), typeof(MarkdownTextViewRenderer));
+				//handlers.AddCompatibilityRenderer(typeof(MarkdownTextView), typeof(MarkdownTextViewRenderer));
 #endif
 			})
 			.ConfigureFonts(fonts =>
