@@ -31,7 +31,9 @@ public partial class MarkdownTextViewHandler
 		}
 		else
 		{
-			platformView.AttributedText = TextUtil.GetAttributedStringFromHtml(markdown.GetHtmlFromMarkdown(true));
+			string html = markdown.GetHtmlFromMarkdown(true);
+			var attributedText = TextUtil.GetAttributedStringFromHtml(html);
+			platformView.AttributedText = attributedText;
 		}
 	}
 }
