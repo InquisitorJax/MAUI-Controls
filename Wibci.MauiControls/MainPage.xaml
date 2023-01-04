@@ -14,12 +14,22 @@
 			       Source="dotnet_bot.png" />
 
 			<!--  BUG iOS doesn't clip bounds :(  -->
-			<Border Padding="0"
-			        HeightRequest="60"
-			        StrokeShape="RoundRectangle 30"
-			        WidthRequest="60">
-				<Grid BackgroundColor="Red" />
-			</Border>
+			<HorizontalStackLayout Spacing="8">
+				<Border Padding="0"
+				        HeightRequest="60"
+				        StrokeShape="RoundRectangle 30"
+				        WidthRequest="60">
+					<Grid BackgroundColor="Red" />
+				</Border>
+				<Frame Padding="0"
+				       CornerRadius="30"
+				       HeightRequest="60"
+				       WidthRequest="60">
+					<Grid BackgroundColor="Red" />
+				</Frame>
+
+			</HorizontalStackLayout>
+
 
 			<Label FontSize="18"
 			       HorizontalOptions="Center"
