@@ -13,6 +13,14 @@
 			       SemanticProperties.Description="Cute dot net bot waving hi to you!"
 			       Source="dotnet_bot.png" />
 
+			<!--  BUG iOS doesn't clip bounds :(  -->
+			<Border Padding="0"
+			        HeightRequest="60"
+			        StrokeShape="RoundRectangle 30"
+			        WidthRequest="60">
+				<Grid BackgroundColor="Red" />
+			</Border>
+
 			<Label FontSize="18"
 			       HorizontalOptions="Center"
 			       SemanticProperties.Description="Welcome to dot net Multi platform App U I"
