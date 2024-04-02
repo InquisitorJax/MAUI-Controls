@@ -39,16 +39,16 @@ public partial class EntryExHandler
         {
             if (entry.HasBorder)
             {
-                PlatformView.Layer.BorderWidth = new nfloat(0.8);
-                PlatformView.Layer.BorderColor = UIColor.LightGray.CGColor;
-                PlatformView.BorderStyle = UITextBorderStyle.RoundedRect;
+                platformView.Layer.BorderWidth = new nfloat(0.8);
+                platformView.Layer.BorderColor = UIColor.LightGray.CGColor;
+                platformView.BorderStyle = UITextBorderStyle.RoundedRect;
             }
             else
             {
-                PlatformView.Layer.BorderWidth = 0;
-                PlatformView.BorderStyle = UITextBorderStyle.None;
+                platformView.Layer.BorderWidth = 0;
+                platformView.BorderStyle = UITextBorderStyle.None;
             }
-            PlatformView.Layer.CornerRadius = 4;
+            platformView.Layer.CornerRadius = 4;
         }
     }
 
@@ -61,7 +61,7 @@ public partial class EntryExHandler
             //TODO: ValidationColor property with default of red
             var isValid = entryEx.IsValid;
             var validationColor = entryEx.ValidationColor;
-            PlatformView.Layer.BorderColor = isValid ? UIColor.LightGray.CGColor : validationColor.ToCGColor();
+            entryHandler.PlatformView.Layer.BorderColor = isValid ? UIColor.LightGray.CGColor : validationColor.ToCGColor();
         }
     }
 

@@ -18,7 +18,7 @@ public partial class EntryExHandler
 
         if (entry is EntryEx entryEx)
         {
-            SetBackgroundAttributes(PlatformView, entryEx);
+            SetBackgroundAttributes(entryHandler.PlatformView, entryEx);
         }
     }
 
@@ -27,8 +27,8 @@ public partial class EntryExHandler
         base.ConnectHandler(platformView);
         if (VirtualView is EntryEx entry)
         {
-            SetBackgroundAttributes(PlatformView, entry);
-            SetupKeyListener(PlatformView, entry);
+            SetBackgroundAttributes(platformView, entry);
+            SetupKeyListener(platformView, entry);
         }
     }
 
