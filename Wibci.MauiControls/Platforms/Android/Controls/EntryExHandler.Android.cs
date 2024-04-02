@@ -9,17 +9,17 @@ using static Android.Views.View;
 
 namespace Wibci.MauiControls.Controls;
 
-public partial class EntryExHandler : EntryHandler
+public partial class EntryExHandler
 {
     private void MapEntryEx(IEntryHandler entryHandler, IEntry entry)
     {
         Console.WriteLine($"====== Handler Fire! {++HandlerCount}");
         Console.WriteLine("=====> Initial Mapping");
 
-        if (entry is EntryEx entryEx && entryHandler is EntryExHandler entryExHandler)
+        if (entry is EntryEx entryEx)
         {
             SetBackgroundAttributes(PlatformView, entryEx);
-            entryExHandler.SetupKeyListener(entryEx);
+            SetupKeyListener(PlatformView, entryEx);
         }
     }
 
@@ -27,7 +27,7 @@ public partial class EntryExHandler : EntryHandler
     {
         Console.WriteLine("=====> Map IsValid!");
 
-        if (entry is EntryEx entryEx && entryHandler is EntryExHandler entryExHandler)
+        if (entry is EntryEx entryEx)
         {
             SetBackgroundAttributes(PlatformView, entryEx);
         }
@@ -76,9 +76,9 @@ public partial class EntryExHandler : EntryHandler
         }
     }
 
-    private void SetupKeyListener(EntryEx entry)
+    private static void SetupKeyListener(AppCompatEditText platformView, EntryEx entry)
     {
-        PlatformView.SetOnKeyListener(new OnKeyListener(entry));
+        platformView.SetOnKeyListener(new OnKeyListener(entry));
     }
 }
 
