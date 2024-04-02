@@ -11,7 +11,6 @@ namespace Wibci.MauiControls.Controls;
 
 public partial class EntryExHandler
 {
-
     private void MapIsValid(IEntryHandler entryHandler, IEntry entry)
     {
         Console.WriteLine("=====> Map IsValid!");
@@ -22,14 +21,26 @@ public partial class EntryExHandler
         }
     }
 
+    
+    private void MapBackgroundCustom(IEntryHandler entryHandler, IEntry entry, Action<IElementHandler, IElement>? action)
+    {
+        MapBackground(entryHandler, entry);
+        if (entry is EntryEx entryEx)
+        {
+            SetBackgroundAttributes(entryHandler.PlatformView, entryEx);
+        }
+    }
+
     protected override void ConnectHandler(AppCompatEditText platformView)
     {
-        base.ConnectHandler(platformView);
         if (VirtualView is EntryEx entry)
         {
+            //platformView.SetPadding(8, 8, 8, 3);
             SetBackgroundAttributes(platformView, entry);
             SetupKeyListener(platformView, entry);
         }
+
+        base.ConnectHandler(platformView);
     }
 
     protected override void DisconnectHandler(AppCompatEditText platformView)
@@ -43,7 +54,7 @@ public partial class EntryExHandler
     {
         GradientDrawable shape = new();
         shape.SetShape(ShapeType.Rectangle);
-        shape.SetCornerRadius(20);
+        shape.SetCornerRadius(16);
 
         if (entry.BackgroundColor != null)
         {

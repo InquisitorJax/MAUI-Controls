@@ -5,8 +5,6 @@
              xmlns:controls="clr-namespace:Wibci.MauiControls.Controls"
              Title="EntryPage">
     <VerticalStackLayout Spacing="8">
-        <Label Text="Border Entry:" />
-        <controls:EntryEx BackgroundColor="Pink" HasBorder="True" />
         <HorizontalStackLayout>
             <Label Text="Validation Entry - is valid?" VerticalOptions="Center" />
             <Switch x:Name="_switch" />
@@ -15,5 +13,11 @@
                           IsValid="{Binding IsToggled, Source={x:Reference _switch}}"
                           KeyPressed="EntryEx_KeyPressed" />
         <Label x:Name="_keyPressLabel" />
+
+        <HorizontalStackLayout>
+            <Label Text="Validation Entry - is valid?" VerticalOptions="Center" />
+            <Switch x:Name="_switch2" />
+        </HorizontalStackLayout>
+        <controls:EntryEx HasBorder="True" IsValid="{Binding IsToggled, Source={x:Reference _switch2}}" />
     </VerticalStackLayout>
 </ContentPage>
