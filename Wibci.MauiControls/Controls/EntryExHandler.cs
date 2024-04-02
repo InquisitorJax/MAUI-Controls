@@ -8,7 +8,6 @@ namespace Wibci.MauiControls.Controls
 
         public EntryExHandler()
         {
-            Mapper.AppendToMapping("Initial", MapEntryEx);
             Mapper.AppendToMapping(nameof(EntryEx.IsValid), MapIsValid);
         }
     }

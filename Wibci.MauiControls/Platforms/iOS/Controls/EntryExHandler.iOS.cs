@@ -31,15 +31,13 @@ public partial class EntryExHandler
         base.DisconnectHandler(platformView);
     }
 
-
-    private void MapEntryEx(IEntryHandler entryHandler, IEntry entry)
+    protected override void ConnectHandler(MauiTextField platformView)
     {
-        Console.WriteLine($"====== Handler Fire! {++HandlerCount}");
-        Console.WriteLine("=====> Initial Mapping");
+        base.ConnectHandler(platformView);
 
-        if (entry is EntryEx entryEx)
+        if (VirtualView is EntryEx entry)
         {
-            if (entryEx.HasBorder)
+            if (entry.HasBorder)
             {
                 PlatformView.Layer.BorderWidth = new nfloat(0.8);
                 PlatformView.Layer.BorderColor = UIColor.LightGray.CGColor;
@@ -50,7 +48,7 @@ public partial class EntryExHandler
                 PlatformView.Layer.BorderWidth = 0;
                 PlatformView.BorderStyle = UITextBorderStyle.None;
             }
-            PlatformView.Layer.CornerRadius = 5;
+            PlatformView.Layer.CornerRadius = 4;
         }
     }
 

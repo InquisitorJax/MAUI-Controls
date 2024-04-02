@@ -11,17 +11,6 @@ namespace Wibci.MauiControls.Controls;
 
 public partial class EntryExHandler
 {
-    private void MapEntryEx(IEntryHandler entryHandler, IEntry entry)
-    {
-        Console.WriteLine($"====== Handler Fire! {++HandlerCount}");
-        Console.WriteLine("=====> Initial Mapping");
-
-        if (entry is EntryEx entryEx)
-        {
-            SetBackgroundAttributes(PlatformView, entryEx);
-            SetupKeyListener(PlatformView, entryEx);
-        }
-    }
 
     private void MapIsValid(IEntryHandler entryHandler, IEntry entry)
     {
@@ -36,6 +25,11 @@ public partial class EntryExHandler
     protected override void ConnectHandler(AppCompatEditText platformView)
     {
         base.ConnectHandler(platformView);
+        if (VirtualView is EntryEx entry)
+        {
+            SetBackgroundAttributes(PlatformView, entry);
+            SetupKeyListener(PlatformView, entry);
+        }
     }
 
     protected override void DisconnectHandler(AppCompatEditText platformView)
