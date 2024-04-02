@@ -37,18 +37,16 @@ public partial class EntryExHandler
 
         if (VirtualView is EntryEx entry)
         {
-            if (entry.HasBorder)
-            {
-                platformView.Layer.BorderWidth = new nfloat(0.8);
-                platformView.Layer.BorderColor = UIColor.LightGray.CGColor;
-                platformView.BorderStyle = UITextBorderStyle.RoundedRect;
-            }
-            else
-            {
-                platformView.Layer.BorderWidth = 0;
-                platformView.BorderStyle = UITextBorderStyle.None;
-            }
-            platformView.Layer.CornerRadius = 4;
+            SetBackgroundAttributes(entry, platformView);
+        }
+    }
+
+    private void MapBackgroundCustom(IEntryHandler entryHandler, IEntry entry, Action<IElementHandler, IElement>? action)
+    {
+        MapBackground(entryHandler, entry);
+        if (entry is EntryEx entryEx)
+        {
+            SetBackgroundAttributes(entryEx, entryHandler.PlatformView);
         }
     }
 
@@ -63,6 +61,22 @@ public partial class EntryExHandler
             var validationColor = entryEx.ValidationColor;
             entryHandler.PlatformView.Layer.BorderColor = isValid ? UIColor.LightGray.CGColor : validationColor.ToCGColor();
         }
+    }
+
+    private static void SetBackgroundAttributes(EntryEx entryEx, MauiTextField textField)
+    {
+        if (entryEx.HasBorder)
+        {
+            textField.Layer.BorderWidth = new nfloat(0.8);
+            textField.Layer.BorderColor = UIColor.LightGray.CGColor;
+            textField.BorderStyle = UITextBorderStyle.RoundedRect;
+        }
+        else
+        {
+            textField.Layer.BorderWidth = 0;
+            textField.BorderStyle = UITextBorderStyle.None;
+        }
+        textField.Layer.CornerRadius = 4;
     }
 
     private void TextField_KeyPressed(object? sender, KeyPressEventArgs e)
