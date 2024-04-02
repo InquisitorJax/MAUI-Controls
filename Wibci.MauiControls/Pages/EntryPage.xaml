@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Wibci.MauiControls.Pages.EntryPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Wibci.MauiControls.Controls"
+             Title="EntryPage">
+    <VerticalStackLayout Spacing="8">
+        <Label Text="Border Entry:" />
+        <controls:EntryEx BackgroundColor="Pink" HasBorder="True" />
+        <HorizontalStackLayout>
+            <Label Text="Validation Entry - is valid?" VerticalOptions="Center" />
+            <Switch x:Name="_switch" />
+        </HorizontalStackLayout>
+        <controls:EntryEx HasBorder="True"
+                          IsValid="{Binding IsToggled, Source={x:Reference _switch}}"
+                          KeyPressed="EntryEx_KeyPressed" />
+        <Label x:Name="_keyPressLabel" />
+    </VerticalStackLayout>
+</ContentPage>

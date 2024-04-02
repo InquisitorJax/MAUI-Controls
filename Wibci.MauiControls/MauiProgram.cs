@@ -15,10 +15,11 @@ public static class MauiProgram
 			.ConfigureMauiHandlers(handlers =>
 			{
 				handlers.AddHandler(typeof(MarkdownTextView), typeof(MarkdownTextViewHandler));
+                handlers.AddHandler(typeof(EntryEx), typeof(EntryExHandler));
 #if ANDROID
-				//handlers.AddCompatibilityRenderer(typeof(MarkdownTextView), typeof(MarkdownTextViewRenderer));
+                //handlers.AddCompatibilityRenderer(typeof(MarkdownTextView), typeof(MarkdownTextViewRenderer));
 #endif
-			})
+            })
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -14,5 +14,10 @@ public partial class MainPage : ContentPage
 	{
 		Shell.Current.GoToAsync(nameof(MarkdownPage), true);
 	}
+
+    private void Entry_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(EntryPage), true);
+    }
 }
 
