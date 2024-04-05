@@ -19,5 +19,8 @@
             <Switch x:Name="_switch2" />
         </HorizontalStackLayout>
         <controls:EntryEx HasBorder="True" IsValid="{Binding IsToggled, Source={x:Reference _switch2}}" />
+        <controls:EntryEx BackgroundColor="Blue"
+                          HasBorder="False"
+                          Text="No Border with blue background" />
     </VerticalStackLayout>
 </ContentPage>

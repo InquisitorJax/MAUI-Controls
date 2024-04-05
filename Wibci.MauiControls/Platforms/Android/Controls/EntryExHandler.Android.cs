@@ -11,16 +11,13 @@ namespace Wibci.MauiControls.Controls;
 
 public partial class EntryExHandler
 {
-    private void MapIsValid(IEntryHandler entryHandler, IEntry entry)
+    private void MapBackgroundDependency(IEntryHandler entryHandler, IEntry entry)
     {
-        Console.WriteLine("=====> Map IsValid!");
-
         if (entry is EntryEx entryEx)
         {
             SetBackgroundAttributes(entryHandler.PlatformView, entryEx);
         }
     }
-
     
     private void MapBackgroundCustom(IEntryHandler entryHandler, IEntry entry, Action<IElementHandler, IElement>? action)
     {
@@ -71,14 +68,7 @@ public partial class EntryExHandler
             shape.SetStroke(3, borderColor.ToAndroid());
         }
 
-        if (entry.HasBorder)
-        {
-            platformView.SetBackground(shape);
-        }
-        else
-        {
-            platformView.Background = null;
-        }
+        platformView.SetBackground(shape);
     }
 
     private static void SetupKeyListener(AppCompatEditText platformView, EntryEx entry)

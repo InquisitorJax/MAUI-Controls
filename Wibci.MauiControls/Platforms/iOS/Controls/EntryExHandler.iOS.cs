@@ -50,10 +50,8 @@ public partial class EntryExHandler
         }
     }
 
-    private void MapIsValid(IEntryHandler entryHandler, IEntry entry)
+    private void MapBackgroundDependency(IEntryHandler entryHandler, IEntry entry)
     {
-        Console.WriteLine("=====> Map IsValid!");
-
         if (entry is EntryEx entryEx)
         {
             //TODO: ValidationColor property with default of red

@@ -9,7 +9,8 @@ namespace Wibci.MauiControls.Controls
         public EntryExHandler()
         {
             Mapper.ModifyMapping(nameof(EntryEx.Background), MapBackgroundCustom);
-            Mapper.AppendToMapping(nameof(EntryEx.IsValid), MapIsValid);
+            Mapper.AppendToMapping(nameof(EntryEx.IsValid), MapBackgroundDependency);
+            Mapper.AppendToMapping(nameof(EntryEx.HasBorder), MapBackgroundDependency);
         }
     }
 }
