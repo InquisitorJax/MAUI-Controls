@@ -30,6 +30,8 @@ public partial class EntryExHandler
 
     protected override void ConnectHandler(AppCompatEditText platformView)
     {
+        Console.WriteLine("Entry Connected!");
+
         if (VirtualView is EntryEx entry)
         {
             //platformView.SetPadding(8, 8, 8, 3);
@@ -42,13 +44,16 @@ public partial class EntryExHandler
 
     protected override void DisconnectHandler(AppCompatEditText platformView)
     {
+        Console.WriteLine("Entry Disconnected!");
+     
         platformView.SetOnKeyListener(null);
-        platformView.Dispose();
-        base.DisconnectHandler(platformView);
+        base.DisconnectHandler(platformView); // will call Dispose on platformView
     }
 
     private static void SetBackgroundAttributes(AppCompatEditText platformView, EntryEx entry)
     {
+        Console.WriteLine("=====> Set BACKGROUND!");
+
         GradientDrawable shape = new();
         shape.SetShape(ShapeType.Rectangle);
         shape.SetCornerRadius(16);
