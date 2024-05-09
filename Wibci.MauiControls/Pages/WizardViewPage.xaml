@@ -3,7 +3,9 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Wibci.MauiControls.Controls"
-             Title="WizardViewPage">
+             xmlns:vm="clr-namespace:Wibci.MauiControls.ViewModel"
+             Title="WizardViewPage"
+             x:DataType="vm:WizardViewModel">
     <Grid RowDefinitions="Auto, *, Auto">
         <Grid.Resources>
             <Style TargetType="Label">
@@ -17,11 +19,13 @@
         <Grid Margin="8">
             <HorizontalStackLayout>
                 <Label FontSize="16" Text="Loop" />
-                <Switch IsToggled="{Binding IsLoopEnabled, Source={x:Reference _wizard}}" />
+                <Switch IsToggled="{Binding IsLoopEnabled}" />
             </HorizontalStackLayout>
         </Grid>
 
-        <controls:WizardView x:Name="_wizard" Grid.Row="1">
+        <controls:WizardView x:Name="_wizard"
+                             Grid.Row="1"
+                             Position="{Binding PagePosition}">
             <Grid BackgroundColor="Red">
                 <Label Text="1" />
             </Grid>
@@ -35,16 +39,16 @@
 
         <Grid Grid.Row="1" VerticalOptions="End">
             <Button Margin="8"
-                    Clicked="Button_Prev"
+                    Command="{Binding GoBackCommand}"
                     HorizontalOptions="Start"
-                    IsEnabled="{Binding CanMoveBack, Source={x:Reference _wizard}}"
-                    Text="Previous"
+                    IsEnabled="{Binding CanMoveBack}"
+                    Text="Back"
                     WidthRequest="100" />
 
             <Button Margin="8"
-                    Clicked="Button_Next"
+                    Command="{Binding GoForwardCommand}"
                     HorizontalOptions="End"
-                    IsEnabled="{Binding CanMoveForward, Source={x:Reference _wizard}}"
+                    IsEnabled="{Binding CanMoveForward}"
                     Text="Next"
                     WidthRequest="100" />
 

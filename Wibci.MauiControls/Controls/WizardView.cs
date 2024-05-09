@@ -6,35 +6,30 @@ public sealed class WizardView : Grid
 {
     public event EventHandler<StepChangedEventArgs>? StepChanged;
 
-    public static readonly BindableProperty IsLoopEnabledProperty = BindableProperty.Create(
-        propertyName: nameof(IsLoopEnabled),
-        returnType: typeof(bool),
-        declaringType: typeof(WizardView),
-        defaultValue: true,
-        defaultBindingMode: BindingMode.OneWay,
-        propertyChanged: OnIsLoopEnabledChanged);
+    public static readonly BindableProperty PositionProperty = BindableProperty.Create(
+       propertyName: nameof(Position),
+       returnType: typeof(int),
+       declaringType: typeof(WizardView),
+       defaultValue: 0,
+       defaultBindingMode: BindingMode.TwoWay,
+       propertyChanged: OnPositionChanged);
 
-    private static void OnIsLoopEnabledChanged(BindableObject bindable, object oldValue, object newValue)
+    private static async  void OnPositionChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is WizardView view)
+        if (bindable is  WizardView view)
         {
-            view.UpdatePositionProperties();
+            await view.MoveToPosition();
         }
     }
 
     private bool _isBusy;
     private const int AnimationTime = 250;
 
-    public bool IsLoopEnabled
+    public int Position
     {
-        get { return (bool)GetValue(IsLoopEnabledProperty); }
-        set { SetValue(IsLoopEnabledProperty, value); }
+        get { return (int)GetValue(PositionProperty); }
+        set { SetValue(PositionProperty, value); }
     }
-
-    public bool CanMoveForward { get; set; } = true;
-    public bool CanMoveBack { get; set; } = true;
-
-    public int Position { get; set; }
 
     protected override void OnChildAdded(Element child)
     {
@@ -47,11 +42,6 @@ public sealed class WizardView : Grid
                 ve.IsVisible = true;
             }
         }
-
-        var currentIndex = GetCurrentIndex();
-        CanMoveBack = IsLoopEnabled || currentIndex > 0;
-        CanMoveForward = IsLoopEnabled || currentIndex < Children.Count - 1;
-
         base.OnChildAdded(child);
     }
 
@@ -66,9 +56,9 @@ public sealed class WizardView : Grid
         return -1;
     }
 
-    public async Task Forward()
+    private async Task Forward()
     {
-        if (_isBusy || !CanMoveForward)
+        if (_isBusy)
             return;
 
         _isBusy = true;
@@ -115,7 +105,7 @@ public sealed class WizardView : Grid
 
             // Invoke an event to know the step changed
             StepChanged?.Invoke(this, new StepChangedEventArgs(currentIndex, nextIndex));
-            UpdatePositionProperties();
+            Position = nextIndex;
         }
         finally
         {
@@ -123,9 +113,9 @@ public sealed class WizardView : Grid
         }
     }
 
-    public async Task Back()
+    private async Task Back()
     {
-        if (_isBusy || !CanMoveBack)
+        if (_isBusy)
             return;
 
         _isBusy = true;
@@ -172,7 +162,7 @@ public sealed class WizardView : Grid
 
             // Invoke an event to know the step changed
             StepChanged?.Invoke(this, new StepChangedEventArgs(currentIndex, nextIndex));
-            UpdatePositionProperties();
+            Position = nextIndex;
         }
         finally
         {
@@ -180,15 +170,15 @@ public sealed class WizardView : Grid
         }
     }
 
-    private void UpdatePositionProperties()
+    private async Task MoveToPosition()
     {
-        var currentIndex = GetCurrentIndex();
-        CanMoveBack = IsLoopEnabled || currentIndex > 0;
-        OnPropertyChanged(nameof(CanMoveBack));
-        CanMoveForward = IsLoopEnabled || currentIndex < Children.Count - 1;
-        OnPropertyChanged(nameof(CanMoveForward));
-        Position = currentIndex;
-        OnPropertyChanged(nameof(Position));
+        var currentVisibleIndex = GetCurrentIndex();
+        if (Position == currentVisibleIndex) return;
+        System.Diagnostics.Debug.WriteLine($"===================> currentIndex: {currentVisibleIndex} new index {Position}");
+        if (Position > currentVisibleIndex)
+            await Forward();
+        else
+            await Back();
     }
 }
 
