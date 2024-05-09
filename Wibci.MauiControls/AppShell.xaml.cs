@@ -10,5 +10,6 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute(nameof(MarkdownPage), typeof(MarkdownPage));
         Routing.RegisterRoute(nameof(EntryPage), typeof(EntryPage));
+        Routing.RegisterRoute(nameof(WizardViewPage), typeof(WizardViewPage));
     }
 }

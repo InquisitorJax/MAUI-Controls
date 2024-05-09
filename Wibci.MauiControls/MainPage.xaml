@@ -29,6 +29,10 @@
                     HorizontalOptions="Center"
                     Text="Entry" />
 
+            <Button Clicked="Wizard_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Wizard View" />
+
 
         </VerticalStackLayout>
     </ScrollView>

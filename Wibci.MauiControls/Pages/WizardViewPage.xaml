@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Wibci.MauiControls.Pages.WizardViewPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Wibci.MauiControls.Controls"
+             Title="WizardViewPage">
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="200" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid Margin="8">
+            <HorizontalStackLayout>
+                <Label FontSize="16" Text="Loop" />
+                <Switch IsToggled="{Binding IsLoopEnabled, Source={x:Reference _wizard}}" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <controls:WizardView x:Name="_wizard" Grid.Row="1">
+            <Grid BackgroundColor="Red">
+                <Label Text="1" />
+            </Grid>
+            <Grid BackgroundColor="Blue">
+                <Label Text="2" />
+            </Grid>
+            <Grid BackgroundColor="Green">
+                <Label Text="3" />
+            </Grid>
+        </controls:WizardView>
+
+        <Grid Grid.Row="1" VerticalOptions="End">
+            <Button Margin="8"
+                    Clicked="Button_Prev"
+                    HorizontalOptions="Start"
+                    IsEnabled="{Binding CanMoveBack, Source={x:Reference _wizard}}"
+                    Text="Previous"
+                    WidthRequest="100" />
+
+            <Button Margin="8"
+                    Clicked="Button_Next"
+                    HorizontalOptions="End"
+                    IsEnabled="{Binding CanMoveForward, Source={x:Reference _wizard}}"
+                    Text="Next"
+                    WidthRequest="100" />
+
+        </Grid>
+
+        <IndicatorView Grid.Row="2"
+                       Margin="8"
+                       Count="{Binding Children.Count, Source={x:Reference _wizard}}"
+                       HorizontalOptions="Center"
+                       IndicatorColor="Gray"
+                       Position="{Binding Position, Source={x:Reference _wizard}}"
+                       SelectedIndicatorColor="OrangeRed"
+                       VerticalOptions="Center" />
+    </Grid>
+</ContentPage>
