@@ -1,5 +1,7 @@
 ﻿namespace Wibci.MauiControls.Controls;
 
+// doc: https://redth.codes/building-a-step-by-step-wizard-control-in-net-maui
+
 public sealed class WizardView : Grid
 {
     public event EventHandler<StepChangedEventArgs>? StepChanged;
