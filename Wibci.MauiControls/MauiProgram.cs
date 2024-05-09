@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Wibci.MauiControls.Controls;
 
@@ -12,7 +13,8 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCompatibility() // to be able to use Renderers
-			.ConfigureMauiHandlers(handlers =>
+            .UseMauiCommunityToolkit()
+            .ConfigureMauiHandlers(handlers =>
 			{
 				handlers.AddHandler(typeof(MarkdownTextView), typeof(MarkdownTextViewHandler));
                 handlers.AddHandler(typeof(EntryEx), typeof(EntryExHandler));

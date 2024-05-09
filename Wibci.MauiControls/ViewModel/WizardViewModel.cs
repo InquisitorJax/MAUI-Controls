@@ -16,7 +16,10 @@ namespace Wibci.MauiControls.ViewModel
         private int _pagePosition;
 
         [ObservableProperty]
-        private string _page2Validation = string.Empty;
+        private string _page2Text = string.Empty;
+
+        [ObservableProperty]
+        private bool _isTextValid = true;
 
         [ObservableProperty]
         private bool _canMoveForward;
@@ -30,6 +33,8 @@ namespace Wibci.MauiControls.ViewModel
         [RelayCommand]
         private void GoForward()
         {
+            if (PagePosition == 1)
+                CheckTextValidation();
             if (CanMoveForward)
                 PagePosition++;
         }
@@ -51,10 +56,23 @@ namespace Wibci.MauiControls.ViewModel
             CheckCanMoveProperties();
         }
 
+        partial void OnPage2TextChanged(string? oldValue, string newValue)
+        {
+            CheckTextValidation();
+        }
+
+        private void CheckTextValidation()
+        {
+            IsTextValid = !string.IsNullOrEmpty(Page2Text);
+            CheckCanMoveProperties();
+        }
+
         private void CheckCanMoveProperties()
         {
             CanMoveBack = PagePosition > 0 || IsLoopEnabled;
             CanMoveForward = PagePosition < 2 || IsLoopEnabled;
+            if (PagePosition == 1)
+                CanMoveForward = IsTextValid;
         }
     }
 

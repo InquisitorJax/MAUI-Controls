@@ -3,16 +3,23 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Wibci.MauiControls.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vm="clr-namespace:Wibci.MauiControls.ViewModel"
              Title="WizardViewPage"
              x:DataType="vm:WizardViewModel">
     <Grid RowDefinitions="Auto, *, Auto">
         <Grid.Resources>
+            <toolkit:InvertedBoolConverter x:Key="ibc" />
             <Style TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="FontSize" Value="200" />
                 <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="Margin" Value="8" />
             </Style>
         </Grid.Resources>
 
@@ -29,28 +36,39 @@
             <Grid BackgroundColor="Red">
                 <Label Text="1" />
             </Grid>
-            <Grid BackgroundColor="Blue">
-                <Label Text="2" />
+            <Grid BackgroundColor="White">
+                <Label Text="2" TextColor="Black" />
+                <VerticalStackLayout Margin="8,8,8,64"
+                                     HeightRequest="180"
+                                     VerticalOptions="End">
+                    <controls:EntryEx ClearButtonVisibility="WhileEditing"
+                                      HorizontalOptions="Fill"
+                                      IsValid="{Binding IsTextValid}"
+                                      Text="{Binding Page2Text}"
+                                      TextColor="Black" />
+                    <Label Margin="16,8,0,0"
+                           IsVisible="{Binding IsTextValid, Converter={StaticResource ibc}}"
+                           Text="Please enter some text to move forward"
+                           FontSize="16"
+                           TextColor="Red" />
+                </VerticalStackLayout>
+
             </Grid>
-            <Grid BackgroundColor="Green">
+            <Grid BackgroundColor="Blue">
                 <Label Text="3" />
             </Grid>
         </controls:WizardView>
 
         <Grid Grid.Row="1" VerticalOptions="End">
-            <Button Margin="8"
-                    Command="{Binding GoBackCommand}"
+            <Button Command="{Binding GoBackCommand}"
                     HorizontalOptions="Start"
                     IsEnabled="{Binding CanMoveBack}"
-                    Text="Back"
-                    WidthRequest="100" />
+                    Text="Back" />
 
-            <Button Margin="8"
-                    Command="{Binding GoForwardCommand}"
+            <Button Command="{Binding GoForwardCommand}"
                     HorizontalOptions="End"
                     IsEnabled="{Binding CanMoveForward}"
-                    Text="Next"
-                    WidthRequest="100" />
+                    Text="Next" />
 
         </Grid>
 
